@@ -6,6 +6,7 @@ window.ComboReader = class ComboReader
 				@buffer = new MoveBuffer()
 
 		step: ->
+				@buffer.step()
 				@bufferMoves()
 
 				for name, combo of @combos
@@ -38,6 +39,9 @@ window.ComboReader = class ComboReader
 				combo_length = combo.length
 				moves = @buffer.moves()
 
+				if moves.length > 0
+						console.log moves.slice()
+
 				while combo_move = combo.shift()
 						accepted = false
 						while move = moves.shift()
@@ -63,7 +67,7 @@ class MoveBuffer
 
 		step: ->
 				@time += 1
-				@buffer = @buffer.filter (e) -> (e.age - @time) < @max_age
+				@buffer = @buffer.filter (e) -> (@time - e.age) > @max_age
 
 		push: (move) ->
 				@buffer.push { move: move, age: @time }
