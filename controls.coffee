@@ -3,16 +3,21 @@ window.KeyboardControls = class KeyboardControls
 		@key_configuration = configuration
 		@state = {}
 
-	start: ->
-		for control,button of @key_configuration
+		for control,_ of @key_configuration
 			@state[control] =
 				down: false
 				pressed: false
+				released: false
 
-			downHandler = (ccontrol) => => @state[ccontrol].down = true
+	start: ->
+		for control,button of @key_configuration
+			downHandler = (ccontrol) => =>
+				if !@state[ccontrol].down
+					@state[ccontrol].pressed = true
+					@state[ccontrol].down = true
 			upHandler = (ccontrol) => =>
 				if @state[ccontrol].down
-					@state[ccontrol].pressed = true
+					@state[ccontrol].released = true
 				@state[ccontrol].down = false
 
 			KeyboardJS.on button, downHandler(control), upHandler(control)
@@ -20,6 +25,7 @@ window.KeyboardControls = class KeyboardControls
 	reset_input: ->
 		for control,state of @state
 			state.pressed = false
+			state.released = false
 
 	step: () ->
 		@reset_input()

@@ -10,17 +10,17 @@ window.ComboReader = class ComboReader
 				@bufferMoves()
 
 				for name, combo of @combos
-						if @matchCombo(combo)
-								@move = name
+						if @matchCombo(combo.moves)
+								@move = combo
 								@buffer.clear()
 								return
 
-				if @state.right.pressed && @state.left.pressed
-						@move = 'Right and Left'
-				else if @state.right.pressed
-						@move = 'Right'
+				if @state.right.pressed
+						@move =
+								full_name: 'Right'
 				else if @state.left.pressed
-						@move = 'Left'
+						@move =
+								full_name: 'Left'
 				else
 						@move = false
 
@@ -38,9 +38,6 @@ window.ComboReader = class ComboReader
 				combo = combo.slice()
 				combo_length = combo.length
 				moves = @buffer.moves()
-
-				if moves.length > 0
-						console.log moves.slice()
 
 				while combo_move = combo.shift()
 						accepted = false

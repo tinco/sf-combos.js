@@ -11,8 +11,38 @@ configuration =
 	heavy_kick: 'h'
 
 combos =
-	#	light_left_hadouken: ['down', 'left', 'light_punch']
-	light_right_hadouken: ['down', 'right', 'light_punch']
+	light_left_hadouken:
+		moves: ['down', 'left', 'light_punch']
+		full_name: "Light Left Hadouken"
+	light_right_hadouken:
+		moves: ['down', 'right', 'light_punch']
+		full_name: "Light Right Hadouken"
+
+simple_moves =
+	dash_left:
+		moves: ['left','left']
+		full_name: "Dash Left"
+	dash_right:
+		moves: ['right','right']
+		full_name: "Dash Right"
+	move_down:
+		moves: ['down','down']
+		full_name: "Down"
+	move_up:
+		moves: ['up','up']
+		full_name: "Move up"
+	move_left:
+		moves: ['left']
+		full_name: "Left"
+	move_right:
+		moves: ['right']
+		full_name: "Right"
+	crouch:
+		moves: ['down']
+		full_name: "Crouch"
+	jump:
+		moves: ['up']
+		full_name: "Jump"
 
 controls = new KeyboardControls(configuration)
 controls.start()
@@ -34,7 +64,7 @@ gameStep = (done) ->
 	comboReader.step()
 	controls.step()
 	if comboReader.move
-		console.log('Move: ' + comboReader.move)
+		console.log('Move: ' + comboReader.move.full_name)
 	done()
 
 gameLoop()
