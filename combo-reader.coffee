@@ -67,7 +67,7 @@ class MoveBuffer
 
 		step: ->
 				@time += 1
-				@buffer = @buffer.filter (e) -> (@time - e.age) > @max_age
+				@buffer = @buffer.filter (e) => (@time - e.age) < @max_age
 
 		push: (move) ->
 				@buffer.push { move: move, age: @time }

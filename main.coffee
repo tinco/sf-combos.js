@@ -11,7 +11,7 @@ configuration =
 	heavy_kick: 'h'
 
 combos =
-	light_left_hadouken: ['down', 'left', 'light_punch']
+	#	light_left_hadouken: ['down', 'left', 'light_punch']
 	light_right_hadouken: ['down', 'right', 'light_punch']
 
 controls = new KeyboardControls(configuration)
