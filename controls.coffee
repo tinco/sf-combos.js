@@ -17,9 +17,9 @@ window.KeyboardControls = class KeyboardControls
 
 			KeyboardJS.on button, downHandler(control), upHandler(control)
 
-		reset_input: ->
-			for control,state of @state
-				state.pressed = false
+	reset_input: ->
+		for control,state of @state
+			state.pressed = false
 
-		step: (entity)->
-			@reset_input.apply(entity)
+	step: () ->
+		@reset_input()

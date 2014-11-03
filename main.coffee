@@ -10,6 +10,8 @@ configuration =
 controls = new KeyboardControls(configuration)
 controls.start()
 
+comboReader = new ComboReader(controls.state)
+
 gameLoop = ->
 	step = 1/60 * 1000
 	looper = ->
@@ -22,6 +24,10 @@ gameLoop = ->
 	looper()
 
 gameStep = (done) ->
+	comboReader.step()
+	controls.step()
+	if comboReader.move
+		console.log('Move: ' + comboReader.move)
 	done()
 
 gameLoop()
