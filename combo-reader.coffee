@@ -27,11 +27,9 @@ window.ComboReader = class ComboReader
 		bufferMoves: ->
 				pressed = []
 				for name, state of @state
-						pressed.push name if state.pressed
+						pressed.push name if state.down
 
-				if pressed.length == 1
-						@buffer.push(pressed[0])
-				else if pressed.length > 1
+				if pressed.length > 0
 						@buffer.push(pressed)
 
 		matchCombo: (combo) ->
@@ -42,7 +40,7 @@ window.ComboReader = class ComboReader
 				while combo_move = combo.shift()
 						accepted = false
 						while move = moves.shift()
-								if combo_move == move
+								if @matchMove(combo_move,move)
 										accepted = true
 										break
 						if !accepted
@@ -51,6 +49,12 @@ window.ComboReader = class ComboReader
 								combo_length -= 1
 
 				combo_length == 0
+
+		matchMove: (move, moves) ->
+				if Array.isArray(move)
+						move.every (m) -> moves.indexOf(m) > -1
+				else
+						moves[0] == move
 
 class MoveBuffer
 		constructor: () -> 

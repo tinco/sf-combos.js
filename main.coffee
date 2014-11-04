@@ -15,7 +15,7 @@ combos =
 		moves: ['down', 'left', 'light_punch']
 		full_name: "Light Left Hadouken"
 	light_right_hadouken:
-		moves: ['down', 'right', 'light_punch']
+		moves: ['down', ['down', 'right'], 'right', 'light_punch']
 		full_name: "Light Right Hadouken"
 
 simple_moves =
